@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.gps_test4"
-        minSdkVersion 16
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -39,4 +39,5 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'net.sourceforge.jexcelapi:jxl:2.6.12'
 }
