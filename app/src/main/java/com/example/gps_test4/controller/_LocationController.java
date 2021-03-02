@@ -9,15 +9,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class _LocationController {
-    final String FILE_NAME = "administractive_code.xlsx";
+    final String FILE_NAME = "administractive_code.xls";
     final String COLUMN_CODE = "행정코드";
-    final String COLUMN_LOCATION = "주소";
+    final String COLUMN_LOCATION = "행정구역명";
     final String COLUMN_ISEXIST = "여부";
 
     ExcelController excelController;
 
     public _LocationController(Context context){
-        this.excelController = new ExcelController();
+        this.excelController = new ExcelController(context);
     }
 
     public ArrayList<_Location> getLocationData(){

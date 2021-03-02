@@ -4,6 +4,7 @@ import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -34,6 +35,7 @@ public class GoogleMapController {
         Location location = new Location("");
 
         try{
+            Log.d("Address_Length : ",address);
             addressList = geocoder.getFromLocationName(address, address.length());
             if(addressList == null || addressList.size()==0){
                 return null;

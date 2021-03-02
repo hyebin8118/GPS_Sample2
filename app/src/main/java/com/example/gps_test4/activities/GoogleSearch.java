@@ -45,10 +45,6 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
         spinner_dropdown.setAdapter(new LocationArrayAdapter(this, locations));
         text_location = findViewById(R.id.location_text);
 
-        Log.d("MAIN_ACTIVITY:LOCATION SIZE", locations.size()+"");
-        locations.forEach(location -> {
-            Log.d("DATA : Check : ", location.toString());
-        });
 
         SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager()
                 .findFragmentById(R.id.google_map);
@@ -66,25 +62,31 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
 
         // onNothingSelected Method Error
 
-        spinner_dropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        spinner_dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("SPINNER_SELECTED : "," : "+position);
-                LocationArrayAdapter adapter = (LocationArrayAdapter)parent.getAdapter();
-                _Location selectedLocation = (_Location)adapter.getItem(position);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("SPINNER_SELECTED : ", " : " + position);
 
-                if(selectedLocation != null){
+                LocationArrayAdapter adapter = (LocationArrayAdapter) parent.getAdapter();
+                _Location selectedLocation = (_Location) adapter.getItem(position);
+
+                Log.d("SPINNER_SELECTED : ", " : " + selectedLocation);
+                Log.d("SPINNER_SELECTED2 : ", " : " + selectedLocation.getLocation());
+
+                if (selectedLocation != null) {
                     String location_value = selectedLocation.getLocation();
-                    Log.d("SPINNER_RESULT = ",":"+location_value);
-                    text_location.setText(location_value);
+                    String location_code = selectedLocation.getCode();
 
+                    Log.d("SPINNER_RESULT = ", ":" + location_value);
+
+                    text_location.setText(location_code);
                     googleMapController.Search(location_value);
                 }
             }
-            /*@Override
-            public void onNothingSelected(AdapterView<?> parent){
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-            }*/
+            }
         });
     }
 }

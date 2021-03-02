@@ -1,6 +1,7 @@
 package com.example.gps_test4.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,7 @@ public class LocationArrayAdapter extends BaseAdapter {
         }
         _Location location = items.get(position);
         TextView spinner_text = converView.findViewById(R.id.spinner_text);
-        spinner_text.setText(location.getCode());
+        spinner_text.setText(location.getLocation());
         return converView;
     }
 }
