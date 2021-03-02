@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -62,6 +63,9 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
 
     public void setEvent(){
         Log.d("CALL_SETEVENT : ","OK");
+
+        // onNothingSelected Method Error
+
         spinner_dropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -77,6 +81,10 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
                     googleMapController.Search(location_value);
                 }
             }
+            /*@Override
+            public void onNothingSelected(AdapterView<?> parent){
+
+            }*/
         });
     }
 }
