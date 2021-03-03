@@ -1,9 +1,12 @@
 package com.example.gps_test4.model;
 
 public class _Location {
-    private String code;
-    private String location;
-    private Boolean isExist;
+
+    // [행정코드] [행정구역명] [여부] 로 이루어진 데이터를 객체화 할 Model(_Location) Class
+
+    private String code;        // 행정코드를 담음
+    private String location;    // 행정구역명을 담음
+    private Boolean isExist;    // 여부를 담음
 
     public Boolean getExist(){
         return isExist;

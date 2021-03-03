@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#E6E1B7"
+    android:background="#FFEFD5"
     android:padding="16dp"
     tools:context=".activities.GoogleSearch">
 
@@ -14,14 +14,38 @@
         android:id="@+id/code_spinner"
         android:layout_width="match_parent"
         android:spinnerMode="dropdown"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        />
 
-    <TextView
-        android:id="@+id/location_text"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:textStyle="bold"/>
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="행정코드"
+            android:textSize="20dp"
+            android:layout_weight="1"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/location_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textAlignment="center"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/latitudeAndLongitude_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"/>
 
     <!--GoogleMap을 보여줄 Fragment Layout-->
     <fragment

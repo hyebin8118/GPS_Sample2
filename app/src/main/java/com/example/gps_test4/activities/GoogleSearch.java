@@ -1,7 +1,9 @@
 package com.example.gps_test4.activities;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
@@ -18,6 +20,7 @@ import com.example.gps_test4.model._Location;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
@@ -31,6 +34,7 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
     ArrayList<_Location> locations;
     Spinner spinner_dropdown;
     TextView text_location;
+    TextView text_latlng;
 
     @Override
     protected void onCreate(Bundle saveInstanceState){
@@ -44,7 +48,7 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
 
         spinner_dropdown.setAdapter(new LocationArrayAdapter(this, locations));
         text_location = findViewById(R.id.location_text);
-
+        text_latlng = findViewById(R.id.latitudeAndLongitude_text);
 
         SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager()
                 .findFragmentById(R.id.google_map);

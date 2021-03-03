@@ -12,7 +12,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDEhVTyvkU0WMQJ_0bKegGJVkpMw2sXcI4"/>
+            android:value="AIzaSyCIm7pQW_E4gLBTdmk9boVfqPbA7u8eLiE"/>
 
         <activity android:name=".activities.GoogleSearch">
             <intent-filter>
