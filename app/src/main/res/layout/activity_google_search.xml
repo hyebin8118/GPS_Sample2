@@ -45,7 +45,8 @@
         android:id="@+id/latitudeAndLongitude_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="10dp"/>
+        android:textSize="15dp"
+        android:textAlignment="center"/>
 
     <!--GoogleMap을 보여줄 Fragment Layout-->
     <fragment

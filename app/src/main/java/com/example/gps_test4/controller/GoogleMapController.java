@@ -19,7 +19,7 @@ import java.util.List;
 public class GoogleMapController {
     Context context;
     private GoogleMap googleMap;
-    LatLng latitudeLongitude;
+    public LatLng latitudeLongitude;
 
     public GoogleMapController(Context context, GoogleMap googleMap){
         this.context = context;

@@ -85,6 +85,7 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
 
                     text_location.setText(location_code);
                     googleMapController.Search(location_value);
+                    text_latlng.setText(googleMapController.latitudeLongitude.toString());
                 }
             }
             @Override
