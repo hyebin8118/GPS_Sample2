@@ -51,11 +51,12 @@ public class ExcelController {
                     int colTotal = sheet.getColumns();
 
                     // Row - 가로(전체 가로줄을 가져옴 -- 1열, 2열 …)
-                    int rowTotal = sheet.getColumn(colTotal-1).length; // 첫번째 가로줄에는 필드명이 나열되어 있음 - 두번째 가로줄부터 저장
+                    int rowTotal = sheet.getColumn(colTotal-1).length;
 
                     // 아래 field의 값을 읽어올 때 field_index라는 특정 인덱스를 사용하여 불러오기 때문에
                     // index 를 통해 값을 읽는 배열이나 ArrayList에 field 리스트를 저장해 두면 field_index 하나로 그에 대응하는 이름과 값을 한번에 읽을 때 사용할 수 있음
                     ArrayList<String> fieldNameList = new ArrayList<>();
+
 
                     // 열을 반복해서 읽음 (1열, 2열…)
                    for(int data_index = 0; data_index < rowTotal; data_index++){

@@ -52,7 +52,3 @@ public class LocationArrayAdapter extends BaseAdapter {
         return converView;
     }
 }
-
-// List를 보여주는 것은 전부 ArrayAdapter 사용
-// 왜 ArrayAdapter가 있는데 LocationArrayAdapter 사용하는지
-// 사용하지 않으면 어떻게 되는지

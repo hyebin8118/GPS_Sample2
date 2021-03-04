@@ -28,3 +28,4 @@ public class _Location {
         this.isExist = isExist;
     }
 }
+

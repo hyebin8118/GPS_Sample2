@@ -25,9 +25,8 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 
 public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallback {
+    // Google Cloud Platform 관련 링크 참고
     // Google Map @from https://webnautes.tistory.com/647
-    // Android Studio keyPass 및 SHA-1 인증서
-    // (Terminal - keytool -list -v -keystore "%USERPROFILE%\.android\debug.keystore" -alias androiddebugkey -storepass android -keypass android)
 
     _LocationController locationController;
     GoogleMapController googleMapController;
@@ -36,6 +35,17 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
     TextView text_location;
     TextView text_latlng;
 
+
+    /*
+    * onCreate Method - Activity 생명 주기로 따지자면 Activity가 실행된 후 가장 먼저 호출되는 메서드
+    * 필수적으로 구현해야 한다.
+    * 전체 수명 주기 동안 단 한 번만 발생해야 하는 애플리케이션 시작 로직을 실행
+    * 데이터를 목록에 바인딩, 일부 클래스 범위 변수를 인스턴스화 가능.
+    * 파라미터로 갖는 saveInstanceState = 활동 이전의 상태가 포함된 Bundle
+    * 처음 생성된 활동인 경우 Bundle 객체의 값은 null이다.
+    * Bundle? 여러가지 타입의 값을 저장하는 Map Class
+    * 자세한 사항은 https://www.crocus.co.kr/1560 링크 참고
+    */
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
@@ -50,6 +60,7 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
         text_location = findViewById(R.id.location_text);
         text_latlng = findViewById(R.id.latitudeAndLongitude_text);
 
+        // SupportMapFragment =
         SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager()
                 .findFragmentById(R.id.google_map);
         mapFragment.getMapAsync(this);
@@ -63,8 +74,6 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
 
     public void setEvent(){
         Log.d("CALL_SETEVENT : ","OK");
-
-        // onNothingSelected Method Error
 
         spinner_dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

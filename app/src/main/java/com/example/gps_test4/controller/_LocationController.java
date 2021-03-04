@@ -21,6 +21,8 @@ public class _LocationController {
     }
 
     public ArrayList<_Location> getLocationData(){
+
+        // _Location model Class : 행정코드, 행정구역명, 여부의 데이터를 담는 model Class
         ArrayList<_Location> locations = new ArrayList<_Location>();
         ArrayList<HashMap<String, String>> excel_arrayList = this.excelController.readExcel(FILE_NAME);
 
