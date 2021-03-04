@@ -29,7 +29,7 @@ public class LocationArrayAdapter extends BaseAdapter {
         return (items == null)? 0 : items.size();
     }
 
-    // position (index)에 해당하는 item 반환
+    // position 에 해당하는 item 반환
     @Override
     public Object getItem(int position){
         return items.get(position);
@@ -41,14 +41,14 @@ public class LocationArrayAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View converView, ViewGroup parent){
-        if(converView == null){
+    public View getView(int position, View convertView, ViewGroup parent){
+        if(convertView == null){
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            converView = inflater.inflate(R.layout.location_spinner_item, parent, false);
+            convertView = inflater.inflate(R.layout.location_spinner_item, parent, false);
         }
         _Location location = items.get(position);
-        TextView spinner_text = converView.findViewById(R.id.spinner_text);
+        TextView spinner_text = convertView.findViewById(R.id.spinner_text);
         spinner_text.setText(location.getLocation());
-        return converView;
+        return convertView;
     }
 }
