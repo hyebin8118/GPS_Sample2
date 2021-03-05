@@ -13,15 +13,11 @@ import jxl.Workbook;
 public class ExcelController {
 
     Context context;
-    // 아래의 ExcelController는 Context를 오버로드 했으므로 기본 생성자를 정의해주었다.
     public ExcelController(){}
 
     public ExcelController(Context context){
         this.context = context;
     }
-    // Context란 실행되고 있는 안드로이드 애플리케이션 객체의 정보를 담고 있는 인터페이스.
-    // 프로젝트의 디렉토리 구조와 같은 정보로 이를 통해 손쉽게 프로젝트 내부의 경로에 접근할 수 있다.
-    // 자세한 정보는 링크 참고 : https://shnoble.tistory.com/57
 
     public ArrayList readExcel(String fileName) {
         // 결과를 담을 arrayList / HashMap을 사용한 이유 - 한 데이터 안의 field가 key, value 값으로 대응되기 때문
@@ -34,9 +30,6 @@ public class ExcelController {
             // fileName은 ExcelController에서 읽어올 파일으로 초기화 시켜줌
             InputStream inputStream = context.getResources().getAssets().open(fileName);
 
-            // Android 에서는 xlxs 파일을 지원하지 않는다. 이를 가능하게(읽을 수 있도록) 하는 외부 라이브러리 - 아래 링크 참고
-            // ariex574.tistory.com/35
-            // poi 라이브러리를 사용할 수 있으나 이는 Android와 호환성이 좋지 않으므로 사용하지 않았다.
             Workbook workbook = Workbook.getWorkbook(inputStream);
 
             // Excel 파일이 있다면
@@ -86,8 +79,6 @@ public class ExcelController {
             e.printStackTrace();
             Log.d("EXCEL_CONTROLLER : ", e.toString());
         }
-        // for문을 정상적으로 수행했다면 resultArrayList 객체에는 엑셀 파일에서 읽은 데이터들이 HashMap 객체에 파싱되어 저장되어 있을 것
-        // 만약 실패했다면 위의 catch문에서 에러가 발생하며 (for문을 도는 도중 에러가 발생했다면)resultArrayList 에는 모든 결과가 담기지 않을 수도 있다.
         return resultArrayList;
     }
 }
