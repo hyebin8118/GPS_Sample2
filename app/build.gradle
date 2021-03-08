@@ -2,6 +2,10 @@ plugins {
     id 'com.android.application'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def googleMapApiKey = properties.getProperty('google.map.key')
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -12,6 +16,9 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
+        resConfigs "ko", "en"
+        manifestPlaceholders=[googleMapApiKey:googleMapApiKey]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -12,19 +12,19 @@
     <!--Android studio용 ComboBox(SelectBox)-->
     <!--Spinner는 dialog와 dropdown 모드가 있다. 기본 값은 dropdown 이며 item이 아래로 떨어지는 형태이다. dialog Mode는 화면 한 가운데 위치-->
     <Spinner
-        android:id="@+id/code_spinner"
+        android:id="@+id/spinner_city"
         android:layout_width="match_parent"
         android:spinnerMode="dropdown"
         android:layout_height="wrap_content"
         />
     <Spinner
-        android:id="@+id/code_spinner_gu"
+        android:id="@+id/spinner_gu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:spinnerMode="dropdown"
         />
     <Spinner
-        android:id="@+id/codeAll_spinner_dong"
+        android:id="@+id/spinner_dong"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:spinnerMode="dropdown"
@@ -78,7 +78,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
         <TextView
             android:layout_width="0dp"
@@ -123,7 +125,8 @@
         android:id="@+id/latitudeAndLongitude_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
+        android:textSize="10dp"
+        android:padding="8dp"
         android:textAlignment="center"/>
 
     <!--GoogleMap을 보여줄 Fragment Layout-->
