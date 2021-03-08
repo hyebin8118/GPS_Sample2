@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GPS_Test4">
 
+        <!--Google Map API Key 감추기 : https://steemit.com/kr/@etainclub/google-map-api-key-->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${googleMapApiKey}"/>

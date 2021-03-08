@@ -3,6 +3,9 @@ package com.example.gps_test4.controller;
 import android.content.Context;
 import android.location.Location;
 
+import com.example.gps_test4.model._City;
+import com.example.gps_test4.model._Dong;
+import com.example.gps_test4.model._Gu;
 import com.example.gps_test4.model._Location;
 
 import java.util.ArrayList;
@@ -58,6 +61,7 @@ public class _LocationController {
         return locations;
     }
 
+    // 어디서든 접근 가능한 getLocationData_court()메서드를 생성한다. 이 메서드는 _Location 클래스를 형으로 갖는 ArrayList 를 반환해야 한다.
     public ArrayList<_Location> getLocationData_court(){
         ArrayList<_Location> locations = new ArrayList<>();
         ArrayList<HashMap<String, String>> excel_arrayList = this.excelController.readExcel(FILE_NAME_COURT);
@@ -81,4 +85,9 @@ public class _LocationController {
         });
         return locations;
     }
+
+   public void classify_city(){}
+   public void classify_gu(){}
+   public void classify_dong(){}
+
 }
