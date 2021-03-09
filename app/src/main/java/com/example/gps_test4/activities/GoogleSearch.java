@@ -89,14 +89,15 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
 
                     Log.d("SPINNER_RESULT = ", ":" + location_value);
 
-                    text_location.setText(location_code);
+                    //text_location.setText(location_code);
+                    text_location.setText(locationController.classify_city());
                     googleMapController.Search(location_value);
                     text_latlng.setText(googleMapController.latitudeLongitude.toString());
                 }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                
             }
         });
     }

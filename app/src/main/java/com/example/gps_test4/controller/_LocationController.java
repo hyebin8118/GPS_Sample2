@@ -2,6 +2,7 @@ package com.example.gps_test4.controller;
 
 import android.content.Context;
 import android.location.Location;
+import android.util.Log;
 
 import com.example.gps_test4.model._City;
 import com.example.gps_test4.model._Dong;
@@ -100,9 +101,11 @@ public class _LocationController {
    public void classify_gu(){
         _Gu _gu = new _Gu();
         _Location _location = new _Location();
+        Log.d("classify","before");
 
         if(_location.getCode().length()==5){
             _gu.setLocation(_location.getLocation());
+            Log.d("Gu : ", _gu.toString());
         }
    }
    public void classify_dong(){
