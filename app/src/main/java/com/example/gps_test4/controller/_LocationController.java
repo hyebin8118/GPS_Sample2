@@ -85,37 +85,4 @@ public class _LocationController {
         });
         return locations;
     }
-
-   public ArrayList classify_dong(){
-        _Dong _dong = new _Dong();
-        _Location _location = new _Location();
-
-        if(_location.getCode().length()==7){
-            _dong._dongList().add(_location.getLocation());
-        }
-        return _dong._dongList();
-   }
-
-    public ArrayList classify_gu(){
-        _Gu _gu = new _Gu();
-        _Location _location = new _Location();
-        Log.d("classify","before");
-
-        if(_location.getCode().length()==5){
-           _gu._guList().add(_location.getLocation());
-        }
-        return _gu._guList();
-    }
-
-    // 시만 분류할 클래스
-    public ArrayList classify_city(){
-        _City _city = new _City();
-        _Location _location = new _Location();
-
-        // 만약 _Location 클래스의 getCode의 길이가 2와 같다면
-        if(_location.getCode().length()==2){
-            _city._cityList().add(_location.getLocation());
-        }
-        return _city._cityList();
-    }
 }

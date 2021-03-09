@@ -3,6 +3,8 @@ package com.example.gps_test4.controller;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.gps_test4.model._City;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +34,13 @@ public class ExcelController {
 
             Workbook workbook = Workbook.getWorkbook(inputStream);
 
+            /*
+            * 존재하는 모든 시트와 데이터를 얻는다면
+            * 엑셀 파일의 시트 개수를 구하고
+            * 반복문(for/while)을 실행하여 각각 데이터를 파싱한 후 ArrayList Class 객체에 저장해 주면 된다.
+            * Sheet sheet = workbook.getSheet
+            * */
+
             // Excel 파일이 있다면
             if(workbook != null){
                 // 파일의 첫번째 시트를 불러옴
@@ -40,22 +49,19 @@ public class ExcelController {
                 // 시트가 존재한다면
                 if(sheet != null){
 
-                    // Column - 세로
+                    // Column - 세로 -- 1열, 2열
                     int colTotal = sheet.getColumns();
 
-                    // Row - 가로(전체 가로줄을 가져옴 -- 1열, 2열 …)
+                    // Row - 가로(전체 가로줄을 가져옴 -- 1행, 2행 …)
                     int rowTotal = sheet.getColumn(colTotal-1).length;
 
-                    // 아래 field의 값을 읽어올 때 field_index라는 특정 인덱스를 사용하여 불러오기 때문에
-                    // index 를 통해 값을 읽는 배열이나 ArrayList에 field 리스트를 저장해 두면 field_index 하나로 그에 대응하는 이름과 값을 한번에 읽을 때 사용할 수 있음
                     ArrayList<String> fieldNameList = new ArrayList<>();
 
-
-                    // 열을 반복해서 읽음 (1열, 2열…)
+                    // 행(가로)을 반복해서 읽음 (1행, 2행…)
                    for(int data_index = 0; data_index < rowTotal; data_index++){
                        HashMap a_data = new HashMap<String, String>();
 
-                       // 행을 반복해서 읽음(A행, B행…)
+                       // 열(세로)을 반복해서 읽음 -- 1행 2행…
                        for(int field_index = 0; field_index < colTotal; field_index++){
                            // 좌표의 셀의 값을 가져옴
                            String cellValue = sheet.getCell(field_index, data_index).getContents();
@@ -63,9 +69,20 @@ public class ExcelController {
                            // 0번째 열이라면 - 첫번째 열은 필드 이름
                            if(data_index == 0){
                                fieldNameList.add(cellValue);
-                           } else {
+                           }
+                           // 0번째 열이 아니라면
+                           else {
                                String fieldName = fieldNameList.get(field_index);
                                a_data.put(fieldName, cellValue);
+
+
+                               // sheet.getCell 의 첫번째 셀만 가져온다.
+
+                               // cellValue의 길이가 2와 같다면
+                               if(cellValue.length()==2){
+                                   Log.d("cellValue.length==2 : ", ""+cellValue);
+
+                               }
                            }
                        }
                        // 결과를 저장할 resultArrayList에 HashMap 객체를 저장
