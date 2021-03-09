@@ -5,10 +5,13 @@ import android.util.Log;
 
 import com.example.gps_test4.model._City;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
+import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 
@@ -22,7 +25,7 @@ public class ExcelController {
     }
 
     public ArrayList readExcel(String fileName) {
-        // 결과를 담을 arrayList / HashMap을 사용한 이유 - 한 데이터 안의 field가 key, value 값으로 대응되기 때문
+        // 결과를 담을 arrayList / HashMap을 사용한 이유 - 한 데이터 안의 field 가 key, value 값으로 대응되기 때문
         // ex. 행정코드      : '11'
         // ex. 행정구역명    : '서울특별시'
         // ex. 여    부     : 'Y'
@@ -33,13 +36,6 @@ public class ExcelController {
             InputStream inputStream = context.getResources().getAssets().open(fileName);
 
             Workbook workbook = Workbook.getWorkbook(inputStream);
-
-            /*
-            * 존재하는 모든 시트와 데이터를 얻는다면
-            * 엑셀 파일의 시트 개수를 구하고
-            * 반복문(for/while)을 실행하여 각각 데이터를 파싱한 후 ArrayList Class 객체에 저장해 주면 된다.
-            * Sheet sheet = workbook.getSheet
-            * */
 
             // Excel 파일이 있다면
             if(workbook != null){
@@ -75,14 +71,6 @@ public class ExcelController {
                                String fieldName = fieldNameList.get(field_index);
                                a_data.put(fieldName, cellValue);
 
-
-                               // sheet.getCell 의 첫번째 셀만 가져온다.
-
-                               // cellValue의 길이가 2와 같다면
-                               if(cellValue.length()==2){
-                                   Log.d("cellValue.length==2 : ", ""+cellValue);
-
-                               }
                            }
                        }
                        // 결과를 저장할 resultArrayList에 HashMap 객체를 저장
@@ -90,6 +78,16 @@ public class ExcelController {
                            resultArrayList.add(a_data);
                        }
                    }
+                }
+                // administrative_code file 의 4002개, court_code file 의 20,546개를 읽어온다.
+                Log.d("resultArrayList.size"," "+resultArrayList.size());
+
+                try{
+                    String elements = resultArrayList.get(0).toString();
+                    Log.d("index of resultArrayList"," "+elements);
+                } catch (Exception e){
+                    e.printStackTrace();
+                    Log.d("index of resultArrayList Error", " ");
                 }
             }
         } catch (Exception e) {
