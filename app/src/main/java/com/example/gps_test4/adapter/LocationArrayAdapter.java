@@ -49,6 +49,7 @@ public class LocationArrayAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.location_spinner_item, parent, false);
         }
         _Location location = items.get(position);
+
         TextView spinner_text = convertView.findViewById(R.id.spinner_text);
         spinner_text.setText(location.getLocation());
         return convertView;
