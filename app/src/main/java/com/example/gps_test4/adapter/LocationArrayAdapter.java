@@ -54,3 +54,9 @@ public class LocationArrayAdapter extends BaseAdapter {
         return convertView;
     }
 }
+
+/*
+* _LocationController Class에서 City, Gu, Dong을 전부 나누는 메서드를 생성했으나 어떻게 가져와서 사용해야 할 지 모르겠음
+* 법정코드 엑셀 파일을 읽는 메서드는 ExcelController에 추가되어 있음
+* 하지만 이 법정 코드를 어떻게 Spinner 에 선택된 item을 기준으로 코드 및 구역 명칭을 연동해서 아래 TextView에 세팅할 지 모르겠음
+* */
