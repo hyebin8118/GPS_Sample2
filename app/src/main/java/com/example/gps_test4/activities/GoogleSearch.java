@@ -29,7 +29,8 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
     ArrayList<_Location> locations_administrative;
     ArrayList<_Location> locations_court;
     Spinner spinner_city, spinner_gu, spinner_dong;
-    TextView text_location;
+    TextView text_location, location_administrative_text;
+    TextView code_court_text, location_court_text;
     TextView text_latlng;
 
 
@@ -50,6 +51,10 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
         spinner_city = findViewById(R.id.spinner_city);
         spinner_gu = findViewById(R.id.spinner_gu);
         spinner_dong = findViewById(R.id.spinner_dong);
+
+        code_court_text = findViewById(R.id.code_court_text);
+        location_court_text = findViewById(R.id.location_court_text);
+        location_administrative_text = findViewById(R.id.location_administrative_text);
 
         // 첫번째 스피너에 행정구역명을 붙임
         spinner_city.setAdapter(new LocationArrayAdapter(this, locations_administrative));
@@ -89,10 +94,13 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
 
                     Log.d("SPINNER_RESULT = ", ":" + location_value);
 
-                    //text_location.setText(location_code);
-                    text_location.setText(locationController.classify_city());
+                    text_location.setText(location_code);
+                    //text_location.setText(locationController.classify_city().toString());
                     googleMapController.Search(location_value);
                     text_latlng.setText(googleMapController.latitudeLongitude.toString());
+                    //location_administrative_text.setText(_city+" "+_gu+" "+_dong);
+                    location_administrative_text.setText(location_value);
+
                 }
             }
             @Override

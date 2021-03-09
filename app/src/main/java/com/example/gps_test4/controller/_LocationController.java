@@ -39,8 +39,8 @@ public class _LocationController {
         ArrayList<HashMap<String, String>> excel_arrayList = this.excelController.readExcel(FILE_NAME_ADMINISTRATIVE);
 
         // forEach() -- Android Studio SDK version 24부터 지원 (gradle -> minSDK version 29로 변경
-        // HashMap<String, String>으로 되어있는 데이터를 Location Class Model로 맵핑하는 과정
-        // excel_arrayList의 원소를 각각 꺼내 (a_data) 각각을 Location Class 객체로 맵핑
+        // HashMap<String, String>으로 되어있는 데이터를 Location Class Model 로 맵핑하는 과정
+        // excel_arrayList 의 원소를 각각 꺼내 (a_data) 각각을 Location Class 객체로 맵핑
         excel_arrayList.forEach(a_data->{
             _Location a_location = new _Location();
 
@@ -88,7 +88,7 @@ public class _LocationController {
     }
 
     // 시만 분류할 클래스
-   public void classify_city(){
+   public _City classify_city(){
         _City _city = new _City();
         _Location _location = new _Location();
 
@@ -97,6 +97,7 @@ public class _LocationController {
             // _location객체의 getLocation메서드를 _City 클래스의 setLocation 메서드에 붙여라
             _city.setLocation(_location.getLocation());
         }
+        return _city;
    }
    public void classify_gu(){
         _Gu _gu = new _Gu();
