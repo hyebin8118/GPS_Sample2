@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.gps_test4.R;
+import com.example.gps_test4.controller._LocationController;
 import com.example.gps_test4.model._City;
 import com.example.gps_test4.model._Location;
 

@@ -4,5 +4,9 @@ import java.util.ArrayList;
 
 // 시·군·구를 담을 Class
 public class _Gu extends _Location{
-    ArrayList<_Dong> dongList;
+    ArrayList<_Dong> _guList;
+
+    public ArrayList _guList(){
+        return _guList();
+    }
 }

@@ -1,7 +1,6 @@
 package com.example.gps_test4.controller;
 
 import android.content.Context;
-import android.location.Location;
 import android.util.Log;
 
 import com.example.gps_test4.model._City;
@@ -87,34 +86,36 @@ public class _LocationController {
         return locations;
     }
 
-    // 시만 분류할 클래스
-   public _City classify_city(){
-        _City _city = new _City();
+   public ArrayList classify_dong(){
+        _Dong _dong = new _Dong();
         _Location _location = new _Location();
 
-        // 만약 _Location 클래스의 getCode의 길이가 2와 같다면
-        if(_location.getCode().length()==2){
-            // _location객체의 getLocation메서드를 _City 클래스의 setLocation 메서드에 붙여라
-            _city.setLocation(_location.getLocation());
+        if(_location.getCode().length()==7){
+            _dong._dongList().add(_location.getLocation());
         }
-        return _city;
+        return _dong._dongList();
    }
-   public void classify_gu(){
+
+    public ArrayList classify_gu(){
         _Gu _gu = new _Gu();
         _Location _location = new _Location();
         Log.d("classify","before");
 
         if(_location.getCode().length()==5){
-            _gu.setLocation(_location.getLocation());
-            Log.d("Gu : ", _gu.toString());
+           _gu._guList().add(_location.getLocation());
         }
-   }
-   public void classify_dong(){
-        _Dong _dong = new _Dong();
+        return _gu._guList();
+    }
+
+    // 시만 분류할 클래스
+    public ArrayList classify_city(){
+        _City _city = new _City();
         _Location _location = new _Location();
 
-        if(_location.getCode().length()==7){
-            _dong.setLocation(_location.getLocation());
+        // 만약 _Location 클래스의 getCode의 길이가 2와 같다면
+        if(_location.getCode().length()==2){
+            _city._cityList().add(_location.getLocation());
         }
-   }
+        return _city._cityList();
+    }
 }
