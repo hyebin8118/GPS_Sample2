@@ -13,6 +13,7 @@ import com.example.gps_test4.R;
 import com.example.gps_test4.adapter.LocationArrayAdapter;
 import com.example.gps_test4.controller.GoogleMapController;
 import com.example.gps_test4.controller._LocationController;
+import com.example.gps_test4.model.City;
 import com.example.gps_test4.model._Location;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -26,8 +27,8 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
 
     _LocationController locationController;
     GoogleMapController googleMapController;
-    ArrayList<_Location> locations_administrative;
-    ArrayList<_Location> locations_court;
+    ArrayList<City> locations_administrative;
+    ArrayList<City> locations_court;
     Spinner spinner_city, spinner_gu, spinner_dong;
     TextView text_location, location_administrative_text;
     TextView code_court_text, location_court_text;
@@ -35,9 +36,9 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
 
 
     /*
-    * onCreate Method - Activity 생명 주기로 따지자면 Activity가 실행된 후 가장 먼저 호출되는 메서드
-    * 자세한 사항은 https://www.crocus.co.kr/1560 링크 참고
-    */
+     * onCreate Method - Activity 생명 주기로 따지자면 Activity가 실행된 후 가장 먼저 호출되는 메서드
+     * 자세한 사항은 https://www.crocus.co.kr/1560 링크 참고
+     */
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
@@ -45,7 +46,7 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
 
         locationController = new _LocationController(this);
         locations_administrative = locationController.getLocationData_administrative();
-        locations_court = locationController.getLocationData_court();
+        //locations_court = locationController.getLocationData_court();
 
         // Spinner
         spinner_city = findViewById(R.id.spinner_city);
@@ -105,7 +106,7 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                
+
             }
         });
     }

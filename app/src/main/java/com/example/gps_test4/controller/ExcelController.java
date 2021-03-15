@@ -3,24 +3,23 @@ package com.example.gps_test4.controller;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.gps_test4.model._City;
+import com.example.gps_test4.model.City;
+import com.example.gps_test4.model.Dong;
+import com.example.gps_test4.model.Gu;
+import com.example.gps_test4.model.LocationData;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.jmx.LoggerDynamicMBean;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
-import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 
 public class ExcelController {
-
-    // 엑셀 파일에서 데이터를 읽어올 때 시 - 시에 해당하는 구 - 그 구에 해당하는 동
-    // 더이상 그 구에 해당하는 동이 없을 경우에는 시에 해당하는 다음 구로 넘어가 반복
-    // 더이상 그 시에 해당하는 구가 없을 경우에는 다음 시로 넘어감
-
     Context context;
     public ExcelController(){}
 
@@ -28,13 +27,12 @@ public class ExcelController {
         this.context = context;
     }
 
-    public ArrayList readExcel(String fileName) {
-        ArrayList resultArrayList = new ArrayList<HashMap<String, String>>();
+    public ArrayList administrative_readExcel(String fileName) {
+        ArrayList resultArrayList = new ArrayList<>();
 
         try {
             // fileName 은 ExcelController 에서 읽어올 파일으로 초기화 시켜줌
             InputStream inputStream = context.getResources().getAssets().open(fileName);
-
             Workbook workbook = Workbook.getWorkbook(inputStream);
 
             // Excel 파일이 있다면
@@ -50,42 +48,107 @@ public class ExcelController {
 
                     // Row 행 (int rowTotal = sheet.getRows(); 로 사용해도 무관하다.)
                     int rowTotal = sheet.getColumn(colTotal-1).length;
-
-                    // 첫번째(index 0) 헹을 담을 ArrayList (행정 코드, 행정 구역명, 여부)
-                    ArrayList<String> fieldNameList = new ArrayList<>();
+                    String cellTest = sheet.getCell(0, 1).getContents();
+                    String cellTest2 = sheet.getCell(1,2).getContents();
 
                     // 행(가로)을 반복해서 읽음
-                   for(int data_index = 0; data_index < rowTotal; data_index++){
-                       HashMap a_data = new HashMap<String, String>();
+                    for(int row_index = 0; row_index < rowTotal; row_index++){
 
-                       // 열(세로)을 반복해서 읽음 -- 1행 2행…
-                       for(int field_index = 0; field_index < colTotal; field_index++){
-                           // 좌표의 셀의 값을 가져옴
-                           String cellValue = sheet.getCell(field_index, data_index).getContents();
-                           Log.d("Before cellValue", " "+cellValue);
+                        String tempValue = sheet.getCell(0, row_index).getContents();
+                        LocationData locationData_aObject;
 
-                           // 0번째 행이라면 - 첫번째 행은 필드 이름
-                           if(data_index == 0){
-                               fieldNameList.add(cellValue);
-                           }
-                           // 0번째 행이 아니라면(행정구역명)
-                           else {
-                               String fieldName = fieldNameList.get(field_index);
-                               a_data.put(fieldName, cellValue); //cellValue - 데이터를 저장하는 임시
-                           }
-                       }
+                        switch (tempValue.length()){
+                            case 2:
+                                if(row_index==0) continue;
+                                locationData_aObject = new City();
+                                locationData_aObject.setCode(tempValue);
+                                break;
+                            case 5:
+                                if(row_index==0) continue;
+                                locationData_aObject = new Gu();
+                                locationData_aObject.setCode(tempValue);
+                                break;
+                            case 7:
+                                if(row_index==0) continue;
+                                locationData_aObject = new Dong();
+                                locationData_aObject.setCode(tempValue);
+                                break;
+                            default:
+                                if(row_index==0) continue;
+                                Log.e("tempValue ","Error");
+                                locationData_aObject = null;
+                        }
 
-                       // 결과를 저장할 resultArrayList에 HashMap 객체를 저장
-                       if(data_index != 0){
-                           resultArrayList.add(a_data);
-                           Log.d("resultArrayList index 0"," "+resultArrayList.get(0));
-                       }
-                   }
+                        tempValue = sheet.getCell(1, row_index).getContents();
+
+                        locationData_aObject.setLocation_name(tempValue);
+
+
+                        // 결과를 저장할 resultArrayList에 HashMap 객체를 저장
+                        if(row_index != 0){
+                            resultArrayList.add(locationData_aObject);
+                        }
+                    }
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
             Log.d("EXCEL_CONTROLLER : ", e.toString());
+        }
+        return resultArrayList;
+    }
+
+    public ArrayList court_readExcel(String fileName, LocationData locationData_aObject){
+        ArrayList resultArrayList = new ArrayList<>();
+        // 조건 설정 완료
+        // LocationData(City, Gu, Dong) 객체를 생성말고 업데이트로
+
+        try{
+            InputStream inputStream = context.getResources().getAssets().open(fileName);
+            Workbook workbook = Workbook.getWorkbook(inputStream);
+
+            if(workbook!=null){
+                Sheet sheet = workbook.getSheet(0);
+
+                if(sheet!=null){
+                    int rowTotal = sheet.getRows();
+
+                    for(int row_index = 0; row_index < rowTotal; row_index++){
+                        String tempValue = sheet.getCell(0, row_index).getContents();
+
+                        // @from https://os94.tistory.com/148, https://cofs.tistory.com/387
+                        int count_tempValue = StringUtils.countMatches(tempValue, "0");
+
+                        if(row_index != 0 && count_tempValue >= 8){
+                            // "서울특별시"를 찾아 update
+                            locationData_aObject = new City();
+                            locationData_aObject.setCode(tempValue);
+                            Log.d("Last City"," "+tempValue);
+
+                        } else if(row_index != 0 && count_tempValue >= 6){
+                            locationData_aObject = new Gu();
+                            locationData_aObject.setCode(tempValue);
+
+                        } else if(row_index != 0 && count_tempValue >= 4){
+                            locationData_aObject = new Dong();
+                            locationData_aObject.setCode(tempValue);
+
+                        } else {
+                            Log.e("court : ","Error court_code");
+                            return null;
+                        }
+                        tempValue = sheet.getCell(1, row_index).getContents();
+                        locationData_aObject.setLocation_name(tempValue);
+
+                        if(row_index != 0){
+                            resultArrayList.add(locationData_aObject);
+                        }
+                    }
+                }
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+            Log.d("Court-file", " Error");
         }
         return resultArrayList;
     }
