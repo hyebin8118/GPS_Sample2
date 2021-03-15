@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.example.gps_test4.R;
 import com.example.gps_test4.model.City;
-import com.example.gps_test4.model._Location;
 
 import java.util.ArrayList;
 
@@ -49,7 +48,7 @@ public class LocationArrayAdapter extends BaseAdapter {
         City city = items.get(position);
 
         TextView spinner_text = convertView.findViewById(R.id.spinner_text);
-        spinner_text.setText(city.getLocation_name());
+        spinner_text.setText(city.getAdministrative_locationName());
         return convertView;
     }
 }

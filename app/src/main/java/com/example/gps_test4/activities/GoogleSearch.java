@@ -101,7 +101,6 @@ public class GoogleSearch extends AppCompatActivity implements OnMapReadyCallbac
                     text_latlng.setText(googleMapController.latitudeLongitude.toString());
                     //location_administrative_text.setText(_city+" "+_gu+" "+_dong);
                     location_administrative_text.setText(location_value);
-
                 }
             }
             @Override
